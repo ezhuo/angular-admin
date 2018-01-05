@@ -5,11 +5,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Dashboard',
     icon: 'nb-home',
     link: '/pages/dashboard',
-    home: true,
+    home: true
   },
   {
     title: 'FEATURES',
-    group: true,
+    group: true
   },
   {
     title: 'UI Features',
@@ -18,33 +18,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Buttons',
-        link: '/pages/ui-features/buttons',
+        link: '/pages/ui-features/buttons'
       },
       {
         title: 'Grid',
-        link: '/pages/ui-features/grid',
+        link: '/pages/ui-features/grid'
       },
       {
         title: 'Icons',
-        link: '/pages/ui-features/icons',
+        link: '/pages/ui-features/icons'
       },
       {
         title: 'Modals',
-        link: '/pages/ui-features/modals',
+        link: '/pages/ui-features/modals'
       },
       {
         title: 'Typography',
-        link: '/pages/ui-features/typography',
+        link: '/pages/ui-features/typography'
       },
       {
         title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
+        link: '/pages/ui-features/search-fields'
       },
       {
         title: 'Tabs',
-        link: '/pages/ui-features/tabs',
-      },
-    ],
+        link: '/pages/ui-features/tabs'
+      }
+    ]
   },
   {
     title: 'Forms',
@@ -52,13 +52,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Form Inputs',
-        link: '/pages/forms/inputs',
+        link: '/pages/forms/inputs'
       },
       {
         title: 'Form Layouts',
-        link: '/pages/forms/layouts',
-      },
-    ],
+        link: '/pages/forms/layouts'
+      }
+    ]
   },
   {
     title: 'Components',
@@ -66,12 +66,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Tree',
-        link: '/pages/components/tree',
-      }, {
-        title: 'Notifications',
-        link: '/pages/components/notifications',
+        link: '/pages/components/tree'
       },
-    ],
+      {
+        title: 'Notifications',
+        link: '/pages/components/notifications'
+      }
+    ]
   },
   {
     title: 'Maps',
@@ -79,17 +80,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Google Maps',
-        link: '/pages/maps/gmaps',
+        link: '/pages/maps/gmaps'
       },
       {
         title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
+        link: '/pages/maps/leaflet'
       },
       {
         title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-    ],
+        link: '/pages/maps/bubble'
+      }
+    ]
   },
   {
     title: 'Charts',
@@ -97,17 +98,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
+        link: '/pages/charts/echarts'
+      }
+    ]
   },
   {
     title: 'Editors',
@@ -115,13 +108,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
+        link: '/pages/editors/tinymce'
       },
       {
         title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
+        link: '/pages/editors/ckeditor'
+      }
+    ]
   },
   {
     title: 'Tables',
@@ -129,9 +122,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-    ],
+        link: '/pages/tables/smart-table'
+      }
+    ]
   },
   {
     title: 'Auth',
@@ -139,20 +132,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Login',
-        link: '/auth/login',
+        link: '/auth/login'
       },
       {
         title: 'Register',
-        link: '/auth/register',
+        link: '/auth/register'
       },
       {
         title: 'Request Password',
-        link: '/auth/request-password',
+        link: '/auth/request-password'
       },
       {
         title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
+        link: '/auth/reset-password'
+      }
+    ]
   },
+  {
+    title: '1 level',
+    icon: 'nb-locked',
+    children: [
+      {
+        title: '2 level',
+
+        children: [
+          {
+            title: 'Smart Table',
+            link: '/pages/tables/smart-table'
+          }
+        ]
+      }
+    ]
+  }
 ];

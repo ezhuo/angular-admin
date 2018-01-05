@@ -1,16 +1,22 @@
-import { Component, OnDestroy, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+  ElementRef
+} from '@angular/core';
 
 @Component({
   selector: 'ngx-tiny-mce',
-  template: '',
+  template: ''
 })
 export class TinyMCEComponent implements OnDestroy, AfterViewInit {
-
   @Output() editorKeyup = new EventEmitter<any>();
 
   editor: any;
 
-  constructor(private host: ElementRef) { }
+  constructor(private host: ElementRef) {}
 
   ngAfterViewInit() {
     tinymce.init({
@@ -23,7 +29,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
           this.editorKeyup.emit(editor.getContent());
         });
       },
-      height: '320',
+      height: '320'
     });
   }
 

@@ -3,27 +3,29 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
+import { appConfig } from './config';
 
 @Injectable()
 export class StateService {
+  public config: any = new appConfig();
 
   protected layouts: any = [
     {
       name: 'One Column',
       icon: 'nb-layout-default',
       id: 'one-column',
-      selected: true,
+      selected: true
     },
     {
       name: 'Two Column',
       icon: 'nb-layout-two-column',
-      id: 'two-column',
+      id: 'two-column'
     },
     {
       name: 'Center Column',
       icon: 'nb-layout-centre',
-      id: 'center-column',
-    },
+      id: 'center-column'
+    }
   ];
 
   protected sidebars: any = [
@@ -31,13 +33,13 @@ export class StateService {
       name: 'Left Sidebar',
       icon: 'nb-layout-sidebar-left',
       id: 'left',
-      selected: true,
+      selected: true
     },
     {
       name: 'Right Sidebar',
       icon: 'nb-layout-sidebar-right',
-      id: 'right',
-    },
+      id: 'right'
+    }
   ];
 
   protected layoutState$ = new BehaviorSubject(this.layouts[0]);

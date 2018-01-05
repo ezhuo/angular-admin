@@ -25,12 +25,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot(),
+    CoreModule.forRoot()
   ],
   bootstrap: [AppComponent],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
 })
-export class AppModule {
-}
+export class AppModule {}

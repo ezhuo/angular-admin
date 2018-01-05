@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import './ckeditor.loader';
-import 'ckeditor';
+import './ckeditor.loader'
+import 'ckeditor'
 
 @Component({
   selector: 'ngx-ckeditor',
@@ -14,7 +14,6 @@ import 'ckeditor';
         <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor>
       </nb-card-body>
     </nb-card>
-  `,
+  `
 })
-export class CKEditorComponent {
-}
+export class CKEditorComponent {}
