@@ -41,7 +41,9 @@
         "../node_modules/tinymce/plugins/link/plugin.min.js",
         "../node_modules/tinymce/plugins/paste/plugin.min.js",
         "../node_modules/tinymce/plugins/table/plugin.min.js",
-        "../node_modules/echarts/dist/echarts.min.js"
+        "./assets/vendors/tinymce/langs/zh_CN.js",
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/blueimp-md5/js/md5.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

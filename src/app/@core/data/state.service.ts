@@ -1,13 +1,16 @@
+import { UserService } from './users.service';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
-import { appConfig } from './config';
+import { appConfig } from '../public/config';
 
 @Injectable()
 export class StateService {
   public config: any = new appConfig();
+
+  constructor(public userService: UserService) {}
 
   protected layouts: any = [
     {

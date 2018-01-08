@@ -1,0 +1,178 @@
+import { NoticeService } from './notice.service';
+import { Injectable } from '@angular/core';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpErrorResponse,
+  HttpResponse,
+  HttpHeaders
+} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { Router } from '@angular/router';
+
+import { AuthService } from './auth.service';
+
+import 'rxjs/add/operator/do';
+
+import * as helper from '../helpers';
+import { UserService } from './users.service';
+import { StateService } from './state.service';
+
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  private config: any;
+
+  constructor(
+    private authService: AuthService,
+    private noticeService: NoticeService,
+    private stateService: StateService,
+    private userService: UserService,
+    private router: Router
+  ) {
+    this.config = stateService.config;
+  }
+
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const rh = this.authService.getRequestHeaders({});
+    const authReq = req.clone({
+      headers: req.headers
+        .set('style', rh.get('style').toString())
+        .set('token', rh.get('token').toString())
+        .set('validate', rh.get('validate').toString())
+    });
+
+    return next.handle(authReq).do(
+      (event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          this.httpResponseSuccess(authReq, event);
+        }
+      },
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          this.httpResponseError(authReq, err);
+        }
+      }
+    );
+  }
+
+  private httpResponseSuccess(authReq, event: HttpResponse<any>) {
+    console.log(event);
+    try {
+      let $http_code = event.status;
+      let $notice = 'info';
+      let $message = '';
+      let data = event.body;
+      this.noticeService.clear();
+
+      if (helper.isObject(data.dt)) {
+        this.userService.apiDt = data.dt || helper.getNow();
+      }
+      if (this.config.http_code.hasOwnProperty($http_code)) {
+        $message += this.config.http_code[$http_code];
+      }
+      if (helper.isObject(data) && data.message && authReq.method !== 'GET') {
+        $message += data.message;
+      }
+
+      switch ($http_code) {
+        case 200:
+          break;
+        case 201:
+          break;
+        case 202:
+          break;
+        case 203:
+          break;
+        case 204:
+          break;
+        case 205:
+          break;
+      }
+
+      if ($message && $notice) {
+        this.noticeService[$notice]($message);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return event;
+  }
+
+  private httpResponseError(authReq, err: HttpErrorResponse) {
+    console.log(err);
+    try {
+      let $http_code = err.status;
+      let $notice = 'error';
+      let $message = '';
+      let data = err.error;
+      this.noticeService.clear();
+
+      let format_validate_message = function($str) {
+        var $msg_str = $str;
+        if (helper.isArray($str)) {
+          $msg_str = $str.join('<br/>');
+          $msg_str =
+            "<div style='width: 100%'><span style='font-size: 20px;color: red'>" +
+            $msg_str +
+            '</span></div>';
+        }
+        return $msg_str;
+      };
+
+      if (this.config.http_code.hasOwnProperty($http_code)) {
+        $message += this.config.http_code[$http_code];
+      }
+      if (typeof data === 'object' && data.message) {
+        $message += data.message;
+      }
+
+      switch ($http_code) {
+        case 400:
+          break;
+        case 401:
+          //重要通知
+          this.authService.isAuth = false;
+          //退出系统
+          setTimeout(() => {
+            this.router.navigate([this.config.router.login]);
+          }, 2000);
+          // _utils.storage_clear(configService);
+          break;
+        case 403:
+          break;
+        case 404:
+          break;
+        case 406:
+          break;
+        case 410:
+          break;
+        case 411:
+          break;
+        case 412:
+          break;
+        case 422:
+          // dialogService.warning(
+          //   format_validate_message(result.data.message),
+          //   10 * 1000
+          // );
+          $notice = '';
+          break;
+        case 500:
+          break;
+      }
+
+      if ($message && $notice) {
+        this.noticeService[$notice]($message);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return err;
+  }
+}

@@ -1,0 +1,8 @@
+@import './@theme/styles/themes';
+@include nb-install-component() {
+    toaster-container /deep/ {
+        #toast-container .toast-close-button {
+            right: 0;
+        }
+    }
+}

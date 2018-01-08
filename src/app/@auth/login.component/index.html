@@ -1,0 +1,76 @@
+<nb-card>
+  <nb-card-body>
+    <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+
+      <h2 class="title">
+        <span [innerText]='stateService.config.app.title'></span>
+      </h2>
+      <small class="form-text sub-title">请输入帐号和密码</small>
+
+      <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
+
+        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
+          <div>
+            <strong>Oh snap!</strong>
+          </div>
+          <div *ngFor="let error of errors">{{ error }}</div>
+        </div>
+
+        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted" class="alert alert-success" role="alert">
+          <div>
+            <strong>Hooray!</strong>
+          </div>
+          <div *ngFor="let message of messages">{{ message }}</div>
+        </div>
+
+        <div class="form-group">
+
+          <label for="input-account" class="sr-only">帐号</label>
+          <input name="account" [(ngModel)]="user.account" class="form-control" placeholder="登录帐号" #account="ngModel" [class.form-control-danger]="account.invalid && account.touched" autofocus
+            [required]="validation.account.required" [minlength]="validation.account.minlength">
+          <small class="form-text error" *ngIf="account.invalid && account.touched && account.errors?.required">
+            请输入登录帐号！
+          </small>
+          <small class="form-text error" *ngIf="account.invalid && account.touched && account.errors?.minlength">
+            请输入合法的登录帐号！
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="input-password" class="sr-only">密码</label>
+          <input name="password" [(ngModel)]="user.password" type="password" class="form-control" placeholder="登录密码" #password="ngModel" [class.form-control-danger]="password.invalid && password.touched"
+            [required]="validation.password.required" [minlength]="validation.password.minLength" [maxlength]="validation.password.maxLength">
+          <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
+            请输入密码
+          </small>
+          <small class="form-text error" *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+            密码必须为 {{ validation.password.minLength }} 到 {{ validation.password.maxLength }} 字符
+          </small>
+        </div>
+
+        <div class="form-group accept-group col-sm-12">
+          <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">记住密码</nb-checkbox>
+        </div>
+
+        <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success" [class.btn-pulse]="submitted">
+          登录
+        </button>
+
+      </form>
+
+      <button (click)='http_test(account)' class='btn'>
+        test
+      </button>
+
+      <div class="links">
+        <small class="form-text"></small>
+
+        <div class="socials">
+          <a href="https://github.com/akveo" target="_blank" class="socicon-github"></a>
+          <a href="https://www.facebook.com/akveo/" target="_blank" class="socicon-facebook"></a>
+          <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon-twitter"></a>
+        </div>
+      </div>
+
+    </div>
+  </nb-card-body>
+</nb-card>
