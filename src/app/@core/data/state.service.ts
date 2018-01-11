@@ -1,10 +1,10 @@
-import {UserService} from './users.service';
-import {Injectable} from '@angular/core';
+import { UserService } from './users.service';
+import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
-import {AppConfig} from '../public/config';
+import { AppConfig } from '../public/config';
 
 @Injectable()
 export class StateService {
@@ -27,7 +27,7 @@ export class StateService {
       id: 'center-column'
     }
   ];
-  
+
   protected sidebars: any = [
     {
       name: 'Left Sidebar',
@@ -44,8 +44,7 @@ export class StateService {
   protected layoutState$ = new BehaviorSubject(this.layouts[0]);
   protected sidebarState$ = new BehaviorSubject(this.sidebars[0]);
 
-  constructor(public userService: UserService) {
-  }
+  constructor(public userService: UserService) {}
 
   setLayoutState(state: any): any {
     this.layoutState$.next(state);

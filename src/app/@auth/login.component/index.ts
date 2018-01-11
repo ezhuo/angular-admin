@@ -83,7 +83,7 @@ export class AuthLoginComponent implements OnInit, OnDestroy {
   }
 
   swal() {
-    this.sweetAlertService.success('fdafd').then(result => {
+    this.sweetAlertService.success('fdafd',5000).then(result => {
       console.log(result);
     });
   }

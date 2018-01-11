@@ -1,26 +1,24 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 const myWindow: any = (typeof window !== 'undefined' && window) || {};
 
 @Injectable()
 export class SweetAlertService {
-
   swalObj = myWindow.Sweetalert2;
 
-  constructor() {
-  }
+  constructor() {}
 
   swal() {
     return myWindow.Sweetalert2(...Array.from(arguments));
   }
 
-  alert(msg: any, type: string = 'info') {
+  alert(msg: any, timer = null, type: string = 'info') {
     const typeName = {
       info: '信息',
       success: '成功啦',
       error: '错误',
       warning: '警告'
-    }
+    };
     const defaultOptions = {
       type,
       confirmButtonText: '好',
@@ -29,7 +27,8 @@ export class SweetAlertService {
       buttonsStyling: true,
       reverseButtons: true,
       title: typeName[type],
-      text: msg
+      text: msg,
+      timer: timer
     };
     return myWindow.Sweetalert2(Object.assign(defaultOptions, {}));
   }
@@ -74,19 +73,19 @@ export class SweetAlertService {
     );
   }
 
-  success(msg: any) {
-    return this.alert(msg, 'success');
+  success(msg: any, timer = null) {
+    return this.alert(msg, timer, 'success');
   }
 
-  warning(msg: any) {
-    return this.alert(msg, 'warning');
+  warning(msg: any, timer = null) {
+    return this.alert(msg, timer, 'warning');
   }
 
-  error(msg: any) {
-    return this.alert(msg, 'error');
+  error(msg: any, timer = null) {
+    return this.alert(msg, timer, 'error');
   }
 
-  info(msg: any) {
-    return this.alert(msg, 'info');
+  info(msg: any, timer = null) {
+    return this.alert(msg, timer, 'info');
   }
 }

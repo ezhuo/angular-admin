@@ -79,7 +79,7 @@ export function getNow() {
 }
 
 export function parseJSON(obj) {
-  if (obj == null || obj == undefined) {
+  if (obj == null || obj === undefined) {
     return obj;
   }
   try {

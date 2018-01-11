@@ -6,8 +6,8 @@ export class AppConfig {
    *系统配置
    */
   app: any = {
-    title: 'ezhuo', // 系统名称
-    code: 'ezhuo',
+    title: '智慧养老平台-杭州资石信息科技有限公司', // 系统名称
+    code: 'zs',
     ver: '1.0'
   };
 

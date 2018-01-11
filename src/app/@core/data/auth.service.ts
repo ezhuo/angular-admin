@@ -70,7 +70,6 @@ export class AuthService {
    * 检查权限
    */
   checkAuth(): boolean {
-    let url = this.stateService.config.router.login;
     if (this.tokenService.isAuth) {
       return true;
     }

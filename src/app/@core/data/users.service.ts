@@ -30,7 +30,7 @@ export class UserService {
   set userInfo(dd: any) {
     this.__userInfo = dd;
     if (dd) {
-      let pic = helper.parseJSON(dd.images) || [];
+      const pic = helper.parseJSON(dd.images) || [];
       if (pic && pic.length > 0) {
         this.__userInfo.picture = pic[0].path;
       }

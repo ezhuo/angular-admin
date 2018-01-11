@@ -1,5 +1,5 @@
-import {NoticeService} from '../utils/notice.service';
-import {Injectable} from '@angular/core';
+import { NoticeService } from '../utils/notice.service';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
@@ -8,31 +8,33 @@ import {
   HttpErrorResponse,
   HttpResponse
 } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {Router} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
-import {TokenService} from './token.service';
+import { TokenService } from './token.service';
 
 import 'rxjs/add/operator/do';
 
 import * as helper from '../helpers';
-import {UserService} from './users.service';
-import {StateService} from './state.service';
+import { UserService } from './users.service';
+import { StateService } from './state.service';
+import { SweetAlertService } from '../utils/sweetalert2.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private config: any;
+  constructor(
+    private tokenService: TokenService,
+    private noticeService: NoticeService,
+    private stateService: StateService,
+    private userService: UserService,
+    private sweetAlertService: SweetAlertService,
+    private router: Router
+  ) {}
 
-  constructor(private tokenService: TokenService,
-              private noticeService: NoticeService,
-              private stateService: StateService,
-              private userService: UserService,
-              private router: Router) {
-    this.config = stateService.config;
-  }
-
-  intercept(req: HttpRequest<any>,
-            next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const rh = this.tokenService.getRequestHeaders(req.body);
     const authReq = req.clone({
       headers: req.headers
@@ -67,8 +69,8 @@ export class AuthInterceptor implements HttpInterceptor {
       if (helper.isObject(data.dt)) {
         this.userService.apiDt = data.dt || helper.getNow();
       }
-      if (this.config.http_code.hasOwnProperty($http_code)) {
-        $message += this.config.http_code[$http_code];
+      if (this.stateService.config.http_code.hasOwnProperty($http_code)) {
+        $message += this.stateService.config.http_code[$http_code];
       }
       if (helper.isObject(data) && data.message && authReq.method !== 'GET') {
         $message += data.message;
@@ -107,7 +109,7 @@ export class AuthInterceptor implements HttpInterceptor {
       const data = err.error;
       this.noticeService.clear();
 
-      const format_validate_message = function ($str) {
+      const format_validate_message = function($str) {
         let $msg_str = $str;
         if (helper.isArray($str)) {
           $msg_str = $str.join('<br/>');
@@ -116,8 +118,8 @@ export class AuthInterceptor implements HttpInterceptor {
         return $msg_str;
       };
 
-      if (this.config.http_code.hasOwnProperty($http_code)) {
-        $message += this.config.http_code[$http_code];
+      if (this.stateService.config.http_code.hasOwnProperty($http_code)) {
+        $message += this.stateService.config.http_code[$http_code];
       }
       if (typeof data === 'object' && data.message) {
         $message += data.message;
@@ -131,7 +133,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.tokenService.isAuth = false;
           // 退出系统
           setTimeout(() => {
-            this.router.navigate([this.config.router.login]);
+            this.router.navigate([this.stateService.config.router.login]);
           }, 2000);
           // _utils.storage_clear(configService);
           break;
@@ -148,10 +150,10 @@ export class AuthInterceptor implements HttpInterceptor {
         case 412:
           break;
         case 422:
-          // dialogService.warning(
-          //   format_validate_message(result.data.message),
-          //   10 * 1000
-          // );
+          this.sweetAlertService.warning(
+            format_validate_message(data.message),
+            10 * 1000
+          );
           $notice = '';
           break;
         case 500:
