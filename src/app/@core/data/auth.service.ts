@@ -1,73 +1,83 @@
-import { NoticeService } from './notice.service';
-import { appConfig } from './../public/config';
+import { Storage } from './../public/storage';
+import { StateService } from './state.service';
+import { NoticeService } from '../utils/notice.service';
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/finally';
+
 import { HttpService } from './http.service';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class AuthService {
-  protected __token: string = 'token-value';
-  protected __isAuth: Boolean = false;
-  protected __config = new appConfig();
+  protected __local = Storage.local();
+  protected __session = Storage.session();
 
   constructor(
     private noticeService: NoticeService,
-    private http: HttpService
+    private http: HttpService,
+    protected tokenService: TokenService,
+    private stateService: StateService
   ) {}
 
-  set token(token: string) {
-    this.__token = token;
+  /**
+   * @param loginData 登录
+   */
+  doLogin(loginData: any): Observable<any> {
+    const login$ = new Subject();
+    const http$ = this.http
+      .post('/pgapi/auth/login', {
+        login_type: 'sys',
+        name: loginData.account,
+        password: loginData.password
+      })
+      .finally(() => {
+        const to = setTimeout(() => {
+          http$.unsubscribe();
+          clearTimeout(to);
+        }, 0);
+      })
+      .subscribe(
+        data => {
+          // 登录成功
+          if (this.tokenService.token_write(data.data.token)) {
+            this.loginSuccess(data);
+            login$.next(data);
+          } else {
+            login$.error({
+              error: {
+                message: '数据包不完整，请留意网络安全！'
+              }
+            });
+          }
+        },
+        error => {
+          // 登录失败
+          login$.error(error);
+        }
+      );
+
+    return login$;
+  }
+
+  loginSuccess(data: any) {
+    if (data && data.data && data.data.menu_list)
+      this.__local.set('menu', data.data.menu_list);
   }
 
   /**
-   * Returns the token value
-   * @returns string
+   * 检查权限
    */
-  get token() {
-    return this.__token;
-  }
-
-  set isAuth(bool) {
-    this.__isAuth = bool;
-  }
-
-  get isAuth() {
-    this.__token = null;
-    return this.__isAuth;
-  }
-
-  getRequestHeaders($data: any): HttpHeaders {
-    let r_data = $data || {};
-    //数据发送类型
-    let style = this.__config.http.style || '10';
-    let validate = '';
-    let token = this.token;
-    try {
-      r_data = JSON.stringify(r_data);
-      validate = style + token + r_data + this.__config.http.check;
-      console.log(validate);
-      validate = md5(validate);
-    } catch (e) {
-      this.noticeService.error('package build error');
-      console.error(e);
+  checkAuth(): boolean {
+    let url = this.stateService.config.router.login;
+    if (this.tokenService.isAuth) {
+      return true;
     }
-
-    return new HttpHeaders()
-      .set('style', style.toString())
-      .set('token', this.__token)
-      .set('validate', validate);
+    return false;
   }
 
-  doLogin(loginData: {}): Observable<any> {
-    const login$ = Observable.never();
-
-    this.http.get('', {}).subscribe({
-      next: data => {
-
-      }
-    });
-    return login$;
+  logoutAuth() {
+    return this.tokenService.token_destory();
   }
 }

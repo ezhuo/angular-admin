@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "ng serve --proxy-config proxy.conf.json"
+  },
+  "dependencies": {
+    "blueimp-md5": "^2.10.0",
+    "echarts": "^3.8.5",
+    "sweetalert2": "^7.3.5",
+    "angular2-jwt": "^0.2.3",
+    "jquery": "^3.2.1",
+    "jstree": "^3.3.5"
+  }
+}

@@ -10,8 +10,8 @@ interface NodeModule {
   id: string;
 }
 
-declare var tinymce: any;
-
 declare var echarts: any;
 
 declare var md5: any;
+
+declare var $: any;

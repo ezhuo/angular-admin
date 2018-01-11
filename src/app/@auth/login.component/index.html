@@ -11,14 +11,14 @@
 
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted" class="alert alert-danger" role="alert">
           <div>
-            <strong>Oh snap!</strong>
+            <strong>失败了！</strong>
           </div>
           <div *ngFor="let error of errors">{{ error }}</div>
         </div>
 
         <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted" class="alert alert-success" role="alert">
           <div>
-            <strong>Hooray!</strong>
+            <strong>成功啦!</strong>
           </div>
           <div *ngFor="let message of messages">{{ message }}</div>
         </div>
@@ -26,8 +26,8 @@
         <div class="form-group">
 
           <label for="input-account" class="sr-only">帐号</label>
-          <input name="account" [(ngModel)]="user.account" class="form-control" placeholder="登录帐号" #account="ngModel" [class.form-control-danger]="account.invalid && account.touched" autofocus
-            [required]="validation.account.required" [minlength]="validation.account.minlength">
+          <input name="account" [(ngModel)]="user.account" class="form-control" placeholder="登录帐号" #account="ngModel" [class.form-control-danger]="account.invalid && account.touched" autofocus [required]="validation.account.required"
+            [minlength]="validation.account.minLength">
           <small class="form-text error" *ngIf="account.invalid && account.touched && account.errors?.required">
             请输入登录帐号！
           </small>
@@ -37,8 +37,8 @@
         </div>
         <div class="form-group">
           <label for="input-password" class="sr-only">密码</label>
-          <input name="password" [(ngModel)]="user.password" type="password" class="form-control" placeholder="登录密码" #password="ngModel" [class.form-control-danger]="password.invalid && password.touched"
-            [required]="validation.password.required" [minlength]="validation.password.minLength" [maxlength]="validation.password.maxLength">
+          <input name="password" [(ngModel)]="user.password" type="password" class="form-control" placeholder="登录密码" #password="ngModel" [class.form-control-danger]="password.invalid && password.touched" [required]="validation.password.required"
+            [minlength]="validation.password.minLength" [maxlength]="validation.password.maxLength">
           <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
             请输入密码
           </small>
@@ -57,10 +57,6 @@
 
       </form>
 
-      <button (click)='http_test(account)' class='btn'>
-        test
-      </button>
-
       <div class="links">
         <small class="form-text"></small>
 
@@ -70,6 +66,8 @@
           <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon-twitter"></a>
         </div>
       </div>
+
+      <button (click)="swal()">swal</button>
 
     </div>
   </nb-card-body>

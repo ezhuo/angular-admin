@@ -5,7 +5,7 @@
 ## 安装
 
 * npm install
-* npm start run
+* npm run start
 
 ### 包含
 

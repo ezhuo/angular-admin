@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
 import { ToasterConfig } from 'angular2-toaster';
-import { NoticeService } from './@core/data/notice.service';
+import { NoticeService } from './@core/utils/notice.service';
 
 @Component({
   selector: 'zs-app',

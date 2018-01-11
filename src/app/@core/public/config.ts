@@ -1,12 +1,12 @@
 /**
  *系统配置
  */
-export class appConfig {
+export class AppConfig {
   /**
    *系统配置
    */
   app: any = {
-    title: 'ezhuo', //系统名称
+    title: 'ezhuo', // 系统名称
     code: 'ezhuo',
     ver: '1.0'
   };
@@ -18,15 +18,15 @@ export class appConfig {
     base: 'api',
     upload: '/api/file/upload',
     down: '/uploads/',
-    canton: 'canton/selectselectselect' //获取区域的默认URL
+    canton: 'canton/selectselectselect' // 获取区域的默认URL
   };
 
   /**
    *区域设置
    */
   canton: any = {
-    id: null, //默认区域ID
-    fdn: null, //默认区域
+    id: null, // 默认区域ID
+    fdn: null, // 默认区域
     name: null
   };
 
@@ -34,18 +34,18 @@ export class appConfig {
    *默认定义
    */
   default: any = {
-    //用户默认图片
+    // 用户默认图片
     user_images: 'assets/images/user/default_user.png',
 
     sign_images: 'assets/images/images/nosign.png',
 
-    //默认用户的图片
+    // 默认用户的图片
     user_cut_images: 'assets/images/user/default_user.png',
 
-    //默认页记录数
+    // 默认页记录数
     page_size: 20,
 
-    //table page size
+    // table page size
     table_page_size: 10
   };
 
@@ -61,10 +61,10 @@ export class appConfig {
    *HTTP配置
    */
   http: any = {
-    //数据包发送格式，10是明文 11是密文
+    // 数据包发送格式，10是明文 11是密文
     style: 10,
 
-    //请求验证代码
+    // 请求验证代码
     check: 'ezhuo@20161016'
   };
 

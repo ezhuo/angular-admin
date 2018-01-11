@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { SweetAlertService } from './../../../@core/utils/sweetalert2.service';
+import { Router } from '@angular/router';
+import { AuthService } from './../../../@core/data/auth.service';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
@@ -10,25 +13,40 @@ import { StateService } from '../../../@core/data/state.service';
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() position = 'normal';
 
   user: any;
+  userInfo: any;
+  userInfo$: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [
+    { title: '个人资料', target: 'profile' },
+    { title: '退出系统', target: 'logout' }
+  ];
 
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private userService: UserService,
     private analyticsService: AnalyticsService,
-    public stateService: StateService
+    public stateService: StateService,
+    private sweetAlertService: SweetAlertService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.userService
-      .getUsers()
-      .subscribe((users: any) => (this.user = users.nick));
+    this.userInfo$ = this.userService.getUser().subscribe(data => {
+      console.log(data);
+      return (this.userInfo = data);
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.userInfo$) {
+      this.userInfo$.unsubscribe();
+    }
   }
 
   toggleSidebar(): boolean {
@@ -47,5 +65,23 @@ export class HeaderComponent implements OnInit {
 
   startSearch() {
     this.analyticsService.trackEvent('startSearch');
+  }
+
+  onMenu($event) {
+    this[$event.target]($event);
+  }
+
+  logout($event) {
+    this.sweetAlertService.confirm('请问要确定退出吗？').then(data => {
+      if (data.value) {
+        if (this.authService.logoutAuth()) {
+          this.router.navigate([this.stateService.config.router.login]);
+        }
+      }
+    });
+  }
+
+  profile($event) {
+    console.log($event);
   }
 }

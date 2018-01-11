@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "ngx-admin-demo"
+    "name": "admin-demo"
   },
   "apps": [
     {
@@ -30,18 +30,15 @@
         "../node_modules/ionicons/scss/ionicons.scss",
         "../node_modules/font-awesome/scss/font-awesome.scss",
         "../node_modules/nebular-icons/scss/nebular-icons.scss",
-        "../node_modules/socicon/css/socicon.css",
         "../node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-        "./app/@theme/styles/styles.scss"
+        "../node_modules/sweetalert2/dist/sweetalert2.css",
+        "./app/@theme/styles/styles.scss",
+        "./app/@theme/styles/index.scss"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/pace-js/pace.min.js",
-        "../node_modules/tinymce/tinymce.min.js",
-        "../node_modules/tinymce/themes/modern/theme.min.js",
-        "../node_modules/tinymce/plugins/link/plugin.min.js",
-        "../node_modules/tinymce/plugins/paste/plugin.min.js",
-        "../node_modules/tinymce/plugins/table/plugin.min.js",
-        "./assets/vendors/tinymce/langs/zh_CN.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.js",
         "../node_modules/echarts/dist/echarts.min.js",
         "../node_modules/blueimp-md5/js/md5.min.js"
       ],
@@ -59,7 +56,6 @@
   },
   "lint": [
     {
-      "files": "src/**/*.ts",
       "project": "src/tsconfig.app.json"
     },
     {

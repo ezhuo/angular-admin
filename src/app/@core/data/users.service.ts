@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
-let counter = 0;
+import * as helper from '../helpers';
 
 @Injectable()
 export class UserService {
@@ -15,34 +14,31 @@ export class UserService {
     kate: { name: 'Kate Martinez', picture: 'assets/images/kate.png' }
   };
 
-  private userArray: any[];
-
-  private __userInfo: Object = {};
+  private __userInfo: any = {};
   private __api_dt: any = null;
 
-  constructor() {
-    // this.userArray = Object.values(this.users);
-  }
+  constructor() {}
 
   getUsers(): Observable<any> {
     return Observable.of(this.users);
   }
 
-  getUserArray(): Observable<any[]> {
-    return Observable.of(this.userArray);
-  }
-
   getUser(): Observable<any> {
-    counter = (counter + 1) % this.userArray.length;
-    return Observable.of(this.userArray[counter]);
+    return Observable.of(this.__userInfo);
   }
 
-  set userInfo(dd: Object) {
+  set userInfo(dd: any) {
     this.__userInfo = dd;
+    if (dd) {
+      let pic = helper.parseJSON(dd.images) || [];
+      if (pic && pic.length > 0) {
+        this.__userInfo.picture = pic[0].path;
+      }
+    }
   }
 
   get userInfo() {
-    return Observable.of(this.__userInfo);
+    return this.__userInfo;
   }
 
   set apiDt(dd: any) {
@@ -50,6 +46,6 @@ export class UserService {
   }
 
   get apiDt() {
-    return Observable.of(this.__api_dt);
+    return this.__api_dt;
   }
 }

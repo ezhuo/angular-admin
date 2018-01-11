@@ -10,7 +10,7 @@
     "target": "http://127.0.0.1:3022/api/sys/pc/v1",
     "secure": false,
     "pathRewrite": {
-      "^/api": ""
+      "^/pgapi": ""
     }
   }
 }

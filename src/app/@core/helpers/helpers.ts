@@ -1,12 +1,3 @@
-/**
- * Extending object that entered in first argument.
- *
- * Returns extended object or false if have no target object or incorrect type.
- *
- * If you wish to clone source object (without modify it), just use empty new
- * object as first argument, like this:
- *   deepExtend({}, yourObj_1, [yourObj_N]);
- */
 export const deepExtend = function (...objects: any[]): any {
   if (arguments.length < 1 || typeof arguments[0] !== 'object') {
     return false;
@@ -134,9 +125,17 @@ export function getDeepFromObject(object = {}, name: string, defaultValue?: any)
 export function urlBase64Decode(str: string): string {
   let output = str.replace(/-/g, '+').replace(/_/g, '/');
   switch (output.length % 4) {
-    case 0: { break; }
-    case 2: { output += '=='; break; }
-    case 3: { output += '='; break; }
+    case 0: {
+      break;
+    }
+    case 2: {
+      output += '==';
+      break;
+    }
+    case 3: {
+      output += '=';
+      break;
+    }
     default: {
       throw new Error('Illegal base64url string!');
     }
@@ -179,11 +178,11 @@ export function b64DecodeUnicode(str: any) {
 }
 
 export function convertToBoolProperty(val: any): boolean {
-    if (typeof val === 'string') {
-      val = val.toLowerCase().trim();
-  
-      return (val === 'true' || val === '');
-    }
-  
-    return !!val;
+  if (typeof val === 'string') {
+    val = val.toLowerCase().trim();
+
+    return (val === 'true' || val === '');
   }
+
+  return !!val;
+}
