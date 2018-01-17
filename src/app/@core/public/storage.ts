@@ -1,50 +1,47 @@
-import * as helper from '../helpers';
-import {AppConfig} from './config';
+import * as helper from '../../@helpers';
+import { AppConfig } from './config';
 
 export class Storage {
-  private $cache = null;
-  private config = new AppConfig();
+    private $cache = null;
+    private config = new AppConfig();
 
-  static local() {
-    return new Storage('localStorage')
-  }
-
-  static session() {
-    return new Storage('sessionStorage')
-  }
-
-  constructor($cache) {
-    this.$cache = window[$cache]
-  }
-
-  private getKey(k) {
-    return this.config.app.code.toString() + '-' + k;
-  }
-
-  set(key, value) {
-    if (helper.isObject(value) || helper.isArray(value)) {
-      return this.$cache.setItem(this.getKey(key), JSON.stringify(value))
-    } else {
-      return this.$cache.setItem(this.getKey(key), value)
+    static local() {
+        return new Storage('localStorage')
     }
-  }
 
-  get(key) {
-    return this.$cache.getItem(this.getKey(key))
-  }
+    static session() {
+        return new Storage('sessionStorage')
+    }
 
-  remove(key) {
-    return this.$cache.removeItem(this.getKey(key))
-  }
+    constructor($cache) {
+        this.$cache = window[$cache]
+    }
 
-  clear() {
-    return this.$cache.clear()
-  }
+    private getKey(k) {
+        return this.config.app.code.toString() + '-' + k;
+    }
 
-  exists(key) {
-    return this.get(this.getKey(key)) || false;
-  }
+    set(key, value) {
+        if (helper.isObject(value) || helper.isArray(value)) {
+            return this.$cache.setItem(this.getKey(key), JSON.stringify(value))
+        } else {
+            return this.$cache.setItem(this.getKey(key), value)
+        }
+    }
+
+    get(key) {
+        return this.$cache.getItem(this.getKey(key))
+    }
+
+    remove(key) {
+        return this.$cache.removeItem(this.getKey(key))
+    }
+
+    clear() {
+        return this.$cache.clear()
+    }
+
+    exists(key) {
+        return this.get(this.getKey(key)) || false;
+    }
 }
-
-
-

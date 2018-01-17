@@ -9,7 +9,7 @@ import { ToasterConfig } from 'angular2-toaster';
 import { NoticeService } from './@core/utils/notice.service';
 
 @Component({
-  selector: 'zs-app',
+  selector: 'app-root',
   template: `
       <toaster-container [toasterconfig]="noticeService.config"></toaster-container>
       <router-outlet></router-outlet>

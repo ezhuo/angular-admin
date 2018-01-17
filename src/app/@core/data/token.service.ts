@@ -5,7 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Storage } from '../public/storage';
 import { JwtHelper } from 'angular2-jwt';
 import { UserService } from './users.service';
-import * as helper from '../helpers';
+import * as helper from '../../@helpers';
 
 @Injectable()
 export class TokenService {

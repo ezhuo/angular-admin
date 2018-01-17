@@ -1,0 +1,25 @@
+{
+    "apps": [
+        {
+            "styles": [
+                "../node_modules/bootstrap/dist/css/bootstrap.css",
+                "../node_modules/typeface-exo/index.css",
+                "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+                "../node_modules/ionicons/scss/ionicons.scss",
+                "../node_modules/font-awesome/scss/font-awesome.scss",
+                "../node_modules/nebular-icons/scss/nebular-icons.scss",
+                "../node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
+                "../node_modules/sweetalert2/dist/sweetalert2.css",
+                "./app/@theme/styles/styles.scss",
+                "./app/@theme/styles/index.scss"
+            ],
+            "scripts": [
+                "../node_modules/jquery/dist/jquery.min.js",
+                "../node_modules/echarts/dist/echarts.min.js",
+                "../node_modules/pace-js/pace.min.js",
+                "../node_modules/sweetalert2/dist/sweetalert2.js",
+                "../node_modules/blueimp-md5/js/md5.min.js"
+            ]
+        }
+    ]
+}

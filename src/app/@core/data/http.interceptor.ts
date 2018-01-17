@@ -15,7 +15,7 @@ import { TokenService } from './token.service';
 
 import 'rxjs/add/operator/do';
 
-import * as helper from '../helpers';
+import * as helper from '../../@helpers';
 import { UserService } from './users.service';
 import { StateService } from './state.service';
 import { SweetAlertService } from '../utils/sweetalert2.service';

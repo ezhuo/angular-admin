@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import * as helper from '../helpers';
+import * as helper from '../../@helpers';
 
 @Injectable()
 export class UserService {
