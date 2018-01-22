@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import {
   NbActionsModule,
@@ -36,7 +36,7 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
-const NB_MODULES = [
+const MODULES = [
   NbCardModule,
   NbLayoutModule,
   NbTabsetModule,
@@ -46,8 +46,7 @@ const NB_MODULES = [
   NbActionsModule,
   NbSearchModule,
   NbSidebarModule,
-  NbCheckboxModule,
-  NgbModule
+  NbCheckboxModule
 ];
 
 const COMPONENTS = [
@@ -76,8 +75,8 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
+  imports: [...BASE_MODULES, ...MODULES],
+  exports: [...BASE_MODULES, ...MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES]
 })
 export class ThemeModule {

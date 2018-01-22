@@ -27,7 +27,7 @@ export class AuthService {
   doLogin(loginData: any): Observable<any> {
     const login$ = new Subject();
     const http$ = this.http
-      .post('/pgapi/auth/login', {
+      .post('/api/auth/login', {
         login_type: 'sys',
         name: loginData.account,
         password: loginData.password
