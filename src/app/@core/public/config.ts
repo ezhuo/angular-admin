@@ -54,7 +54,7 @@ export class AppConfig {
    */
   router: any = {
     home: '/app/dashboard',
-    login: '/auth/login'
+    login: '/passport/login'
   };
 
   /**

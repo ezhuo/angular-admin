@@ -1,11 +1,11 @@
-import { AuthService } from './../../@core/data/auth.service';
+import { AuthService } from '../../../@core/data/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NoticeService } from '../../@core/utils/notice.service';
-import { StateService } from '../../@core/data/state.service';
+import { NoticeService } from '../../../@core/utils/notice.service';
+import { StateService } from '../../../@core/data/state.service';
 import { Router, Route } from '@angular/router';
-import { HttpService } from '../../@core/data/http.service';
+import { HttpService } from '../../../@core/data/http.service';
 import 'rxjs/add/operator/finally';
-import { SweetAlertService } from '../../@core/utils/sweetalert2.service';
+import { SweetAlertService } from '../../../@core/utils/sweetalert2.service';
 
 @Component({
   selector: 'zs-auth-login',

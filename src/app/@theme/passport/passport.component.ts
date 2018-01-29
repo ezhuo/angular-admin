@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: ['']
 })
-export class AuthComponent implements OnInit {
+export class PassportComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

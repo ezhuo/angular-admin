@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AuthGuard } from './@core/data/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: 'app/@auth/auth.module#AuthModule' },
+  { path: 'passport', loadChildren: 'app/@theme/passport/passport.module#PassportModule' },
   {
     path: 'app',
     loadChildren: 'app/pages/pages.module#PagesModule',

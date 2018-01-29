@@ -20,7 +20,7 @@ export class PagesComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    console.log(this.__local.get('menu'));
+    // console.log(this.__local.get('menu'));
   }
 
   ngOnDestroy() {}
