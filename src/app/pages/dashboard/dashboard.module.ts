@@ -1,7 +1,7 @@
+import { SharedModule } from './../../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 
-import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { ContactsComponent } from './contacts/contacts.component';
@@ -23,7 +23,7 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
 
 @NgModule({
   imports: [
-    ThemeModule,
+    SharedModule,
     NgxEchartsModule,
   ],
   declarations: [
